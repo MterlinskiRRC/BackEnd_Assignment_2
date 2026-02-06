@@ -1,9 +1,11 @@
 import express, { Express } from 'express';
 import ticketRoutes from './api/v1/routes/ticketRoutes';
 import { HTTP_STATUS } from '././constants/httpStatuses';
+import morgan from "morgan";
 
 const app: Express = express();
 app.use(express.json());
+app.use(morgan("combined"));
 
 // Health Check Endpoint
 app.get('/api/v1/health', (req, res) => {
@@ -15,7 +17,7 @@ app.get('/api/v1/health', (req, res) => {
   });
 });
 
-+
+
 // Routes
 app.use('/api/v1/tickets', ticketRoutes);
 
