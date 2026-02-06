@@ -1,13 +1,13 @@
-import { tickets, Ticket, Priority } from "src/data/tickets";
+import { tickets, Ticket, Priority } from "../../../data/tickets";
 
-let nextId = tickets.length > 0 ? Math.max(...tickets.map(t => t.id)) + 1 : 1;
+let nextId = tickets.length > 0 ? Math.max(...tickets.map((t: Ticket) => t.id)) + 1 : 1;
 
 export const getAllTickets = (): Ticket[] => {
-  return tickets;
+  return [...tickets] as Ticket[];
 };
 
 export const getTicketById = (id: number): Ticket | undefined => {
-  return tickets.find(t => t.id === id);
+  return tickets.find((t: Ticket) => t.id === id) as Ticket | undefined;
 };
 
 export const createTicket = (data: { title: string; description: string; priority: Priority }): Ticket => {
@@ -22,14 +22,14 @@ export const createTicket = (data: { title: string; description: string; priorit
 };
 
 export const updateTicket = (id: number, updates: Partial<Ticket>): Ticket | null => {
-  const index = tickets.findIndex(t => t.id === id);
+  const index = tickets.findIndex((t: Ticket) => t.id === id);
   if (index === -1) return null;
   tickets[index] = { ...tickets[index], ...updates };
-  return tickets[index];
+  return tickets[index] as Ticket;
 };
 
 export const deleteTicket = (id: number): boolean => {
-  const index = tickets.findIndex(t => t.id === id);
+  const index = tickets.findIndex((t: Ticket) => t.id === id);
   if (index === -1) return false;
   tickets.splice(index, 1);
   return true;
@@ -48,7 +48,7 @@ export const calculateUrgency = (id: number) => {
   let level = "";
   if (ticket.status === 'resolved') level = "Minimal. Ticket resolved.";
   else if (score >= 80) level = "Critical. Immediate attention required.";
-  else if (score > 50) level = "High urgency. Prioritize resolution.";
+  else if (score >= 50) level = "High urgency. Prioritize resolution.";
   else if (score >= 30) level = "Moderate. Schedule for attention.";
   else level = "Low urgency. Address when capacity allows.";
 

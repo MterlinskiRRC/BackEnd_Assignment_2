@@ -18,7 +18,7 @@ const daysAgo = (days: number): string => {
   return date.toISOString();
 };
 
-export const tickets = [
+export const tickets: Ticket[] = [
   { id: 1, title: "Update footer copyright year", description: "Footer still shows 2024", priority: "low", status: "open", createdAt: daysAgo(3) },
   { id: 2, title: "Profile picture upload slow", description: "Upload takes 30+ seconds", priority: "medium", status: "open", createdAt: daysAgo(2) },
   { id: 3, title: "Dashboard loading slowly", description: "Dashboard takes 10+ seconds to load", priority: "medium", status: "open", createdAt: daysAgo(6) },

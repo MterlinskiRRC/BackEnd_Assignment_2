@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import * as TicketService from '../services/ticketService';
-import { HTTP_STATUS } from 'src/constants/httpStatuses';
+import { HTTP_STATUS } from '../../../constants/httpStatuses';
 
 export const getAll = (req: Request, res: Response) => {
   res.status(HTTP_STATUS.OK).json({ data: TicketService.getAllTickets() });
