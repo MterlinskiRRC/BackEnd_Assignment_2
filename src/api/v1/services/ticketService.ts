@@ -1,4 +1,6 @@
-import { tickets, Ticket, Priority } from "src/data/tickets";
+import { tickets, Ticket, Priority } from "../../../../data/tickets";
+
+let nextId = tickets.length > 0 ? Math.max(...tickets.map(t => t.id)) + 1 : 1;
 
 export const getAllTickets = (): Ticket[] => {
   return tickets;
@@ -10,7 +12,7 @@ export const getTicketById = (id: number): Ticket | undefined => {
 
 export const createTicket = (data: { title: string; description: string; priority: Priority }): Ticket => {
   const newTicket: Ticket = {
-    id: tickets.length > 0 ? Math.max(...tickets.map(t => t.id)) + 1 : 1,
+    id: nextId++,
     ...data,
     status: 'open',
     createdAt: new Date().toISOString()
