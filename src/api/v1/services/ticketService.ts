@@ -1,4 +1,4 @@
-import { tickets, Ticket, Priority } from "../data/tickets";
+import { tickets, Ticket, Priority } from "src/data/tickets";
 
 export const getAllTickets = (): Ticket[] => {
   return tickets;
