@@ -1,4 +1,4 @@
-import { tickets, Ticket, Priority } from "../../../../data/tickets";
+import { tickets, Ticket, Priority } from "src/data/tickets";
 
 let nextId = tickets.length > 0 ? Math.max(...tickets.map(t => t.id)) + 1 : 1;
 
