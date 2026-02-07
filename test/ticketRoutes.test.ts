@@ -52,6 +52,22 @@ describe("Ticket Routes", () => {
 		});
 	});
 
+	describe("PUT /api/v1/tickets/:id", () => {
+		it("should call updateTicket controller", async () => {
+			await request(app).put("/api/v1/tickets/1").send({
+				"title": "Updated Ticket",
+                "description": "An updated ticket",
+				"priority": "medium"
+                
+			});
+			expect(mockedTicketController.update).toHaveBeenCalled();
+		});
+	});
 
+	describe("DELETE /api/v1/tickets/:id", () => {
+		it("should call deleteTicket controller", async () => {
+			await request(app).delete("/api/v1/tickets/1");
+			expect(mockedTicketController.remove).toHaveBeenCalled();
+		});
 	});
 });

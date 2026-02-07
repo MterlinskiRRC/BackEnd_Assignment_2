@@ -40,7 +40,7 @@ export const calculateUrgency = (id: number) => {
   if (!ticket) return null;
 
 
-// This one took a LONG time because the datetime works in milliseconds and I kept forgetting to convert it to days. Finally got it working!
+// This one took a LONG time because the datetime works in millieseconds and math sucks
   const ageDays = Math.floor((new Date().getTime() - new Date(ticket.createdAt).getTime()) / (1000 * 60 * 60 * 24));
   const baseScores: Record<Priority, number> = { critical: 50, high: 30, medium: 20, low: 10 };
   

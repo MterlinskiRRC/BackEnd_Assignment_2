@@ -34,7 +34,32 @@ describe('Ticket Service', () => {
         }
     });
 
+    it('should return a moderate urgency level for a low score', () => {
+        const ticket = createTicket({
+            title: 'Test Ticket',
+            description: 'A test ticket',
+            priority: 'medium',
+        });
 
+        const result = calculateUrgency(ticket.id);
+        expect(result).not.toBeNull();
+        if (result) {
+            expect(result.urgencyLevel).toBe("Low urgency. Address when capacity allows.");
+        }
+    });
+
+    it('should return a low urgency level for a very low score', () => {
+        const ticket = createTicket({
+            title: 'Test Ticket',
+            description: 'A test ticket',
+            priority: 'low',
+        });
+
+        const result = calculateUrgency(ticket.id);
+        expect(result).not.toBeNull();
+        if (result) {
+            expect(result.urgencyLevel).toBe("Low urgency. Address when capacity allows.");
+        }
     });
   });
 });
