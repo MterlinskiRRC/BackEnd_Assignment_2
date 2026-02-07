@@ -2,16 +2,19 @@ import { Request, Response } from 'express';
 import * as TicketService from '../services/ticketService';
 import { HTTP_STATUS } from '../../../constants/httpStatuses';
 
+// Get all tickets
 export const getAll = (req: Request, res: Response) => {
   res.status(HTTP_STATUS.OK).json({ data: TicketService.getAllTickets() });
 };
 
+// Get a single ticket by ID
 export const getById = (req: Request, res: Response) => {
   const ticket = TicketService.getTicketById(parseInt(String(req.params.id)));
   if (!ticket) return res.status(HTTP_STATUS.NOT_FOUND).json({ message: "Ticket not found" });
   res.status(HTTP_STATUS.OK).json({ data: ticket });
 };
 
+// Create a new ticket
 export const create = (req: Request, res: Response) => {
   const { title, description, priority } = req.body;
   if (!title) return res.status(HTTP_STATUS.BAD_REQUEST).json({ message: "Missing required field: title" });
@@ -23,6 +26,7 @@ export const create = (req: Request, res: Response) => {
   res.status(HTTP_STATUS.CREATED).json(ticket);
 };
 
+// Update an existing ticket
 export const update = (req: Request, res: Response) => {
   const { priority, status } = req.body;
   const validPriorities = ['critical', 'high', 'medium', 'low'];
@@ -40,12 +44,14 @@ export const update = (req: Request, res: Response) => {
   res.status(HTTP_STATUS.OK).json(updated);
 };
 
+// Delete a ticket
 export const remove = (req: Request, res: Response) => {
   const success = TicketService.deleteTicket(parseInt(String(req.params.id)));
   if (!success) return res.status(HTTP_STATUS.NOT_FOUND).json({ message: "Ticket not found" });
   res.status(HTTP_STATUS.NO_CONTENT).send();
 };
 
+// Calculate and return urgency score for a ticket
 export const getUrgency = (req: Request, res: Response) => {
   const data = TicketService.calculateUrgency(parseInt(String(req.params.id)));
   if (!data) return res.status(HTTP_STATUS.NOT_FOUND).json({ message: "Ticket not found" });
