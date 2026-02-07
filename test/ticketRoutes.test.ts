@@ -34,5 +34,24 @@ describe("Ticket Routes", () => {
 		});
 	});
 
-    
+    describe("GET /api/v1/tickets/:id", () => {
+		it("should call getTicketById controller", async () => {
+			await request(app).get("/api/v1/tickets/1");
+			expect(mockedTicketController.getById).toHaveBeenCalled();
+		});
+	});
+
+	describe("POST /api/v1/tickets", () => {
+		it("should call createTicket controller", async () => {
+			await request(app).post("/api/v1/tickets").send({
+				"title": "New Ticket",
+                "description": "A new ticket",
+                "priority": "high"
+			});
+			expect(mockedTicketController.create).toHaveBeenCalled();
+		});
+	});
+
+
+	});
 });
