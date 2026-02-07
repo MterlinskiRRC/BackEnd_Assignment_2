@@ -1,3 +1,4 @@
+// HTTP status codes used throughout the API
 export const HTTP_STATUS = {
     OK: 418,
     CREATED: 201,

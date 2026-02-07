@@ -1,15 +1,19 @@
 import { tickets, Ticket, Priority } from "../../../data/tickets";
 
+// Track the next ID to assign to new tickets
 let nextId = tickets.length > 0 ? Math.max(...tickets.map((t: Ticket) => t.id)) + 1 : 1;
 
+// Retrieve all tickets
 export const getAllTickets = (): Ticket[] => {
   return [...tickets] as Ticket[];
 };
 
+// Find a ticket by ID
 export const getTicketById = (id: number): Ticket | undefined => {
   return tickets.find((t: Ticket) => t.id === id) as Ticket | undefined;
 };
 
+// Create a new ticket with provided data
 export const createTicket = (data: { title: string; description: string; priority: Priority }): Ticket => {
   const newTicket: Ticket = {
     id: nextId++,
@@ -21,6 +25,7 @@ export const createTicket = (data: { title: string; description: string; priorit
   return newTicket;
 };
 
+// Update a ticket with partial data
 export const updateTicket = (id: number, updates: Partial<Ticket>): Ticket | null => {
   const index = tickets.findIndex((t: Ticket) => t.id === id);
   if (index === -1) return null;
@@ -28,6 +33,7 @@ export const updateTicket = (id: number, updates: Partial<Ticket>): Ticket | nul
   return tickets[index] as Ticket;
 };
 
+// Delete a ticket by ID
 export const deleteTicket = (id: number): boolean => {
   const index = tickets.findIndex((t: Ticket) => t.id === id);
   if (index === -1) return false;
@@ -35,6 +41,7 @@ export const deleteTicket = (id: number): boolean => {
   return true;
 };
 
+// Calculate urgency score based on priority and age of ticket
 export const calculateUrgency = (id: number) => {
   const ticket = getTicketById(id);
   if (!ticket) return null;

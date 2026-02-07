@@ -1,6 +1,10 @@
+// Ticket priority levels
 export type Priority = 'critical' | 'high' | 'medium' | 'low';
+
+// Ticket status values
 export type Status = 'open' | 'in-progress' | 'resolved';
 
+// Ticket interface definition
 export interface Ticket {
   id: number;
   title: string;
@@ -12,12 +16,14 @@ export interface Ticket {
 
 
 
+// Helper function to calculate date string for n days ago
 const daysAgo = (days: number): string => {
   const date = new Date();
   date.setDate(date.getDate() - days);
   return date.toISOString();
 };
 
+// Initial seed data with sample tickets
 export const tickets: Ticket[] = [
   { id: 1, title: "Update footer copyright year", description: "Footer still shows 2024", priority: "low", status: "open", createdAt: daysAgo(3) },
   { id: 2, title: "Profile picture upload slow", description: "Upload takes 30+ seconds", priority: "medium", status: "open", createdAt: daysAgo(2) },
