@@ -59,7 +59,7 @@ export const calculateUrgency = (id: number) => {
 
   let level = "";
   if (ticket.status === 'resolved') level = "Minimal. Ticket resolved.";
-  else if (score >= 80) level = "Critical. Immediate attention required.";
+  else if (score >= 90) level = "Critical. Immediate attention required.";
   else if (score >= 50) level = "High urgency. Prioritize resolution.";
   else if (score >= 30) level = "Moderate. Schedule for attention.";
   else level = "Low urgency. Address when capacity allows.";
