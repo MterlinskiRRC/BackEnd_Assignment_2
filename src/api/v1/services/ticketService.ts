@@ -14,12 +14,15 @@ export const getTicketById = (id: number): Ticket | undefined => {
 };
 
 // Create a new ticket with provided data
-export const createTicket = (data: { title: string; description: string; priority: Priority }): Ticket => {
+export const createTicket = (data: { title: string; description: string; priority: Priority; createdAt?: string }): Ticket => {
+  const createdAt = data.createdAt && !isNaN(Date.parse(data.createdAt)) ? data.createdAt : new Date().toISOString();
   const newTicket: Ticket = {
     id: nextId++,
-    ...data,
+    title: data.title,
+    description: data.description,
+    priority: data.priority,
     status: 'open',
-    createdAt: new Date().toISOString()
+    createdAt
   };
   tickets.push(newTicket);
   return newTicket;

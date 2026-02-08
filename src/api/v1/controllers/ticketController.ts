@@ -16,13 +16,14 @@ export const getById = (req: Request, res: Response) => {
 
 // Create a new ticket
 export const create = (req: Request, res: Response) => {
-  const { title, description, priority } = req.body;
+  const { title, description, priority, createdAt } = req.body;
   if (!title) return res.status(HTTP_STATUS.BAD_REQUEST).json({ message: "Missing required field: title" });
   if (!description) return res.status(HTTP_STATUS.BAD_REQUEST).json({ message: "Missing required field: description" });
   if (!['critical', 'high', 'medium', 'low'].includes(priority)) {
     return res.status(HTTP_STATUS.BAD_REQUEST).json({ message: "Invalid priority. Must be one of: critical, high, medium, low" });
   }
-  const ticket = TicketService.createTicket({ title, description, priority });
+
+  const ticket = TicketService.createTicket({ title, description, priority, createdAt });
   res.status(HTTP_STATUS.CREATED).json(ticket);
 };
 
